@@ -8,10 +8,10 @@
   Zwraca:
     Liczbe zespolona Skl1 rowna 0
 */
-void Inicjalizuj(LZespolona & Skl1)
+void Inicjalizuj(LZespolona & Skl1, double a, double b)
 {
-  Skl1.re = 0;
-  Skl1.im = 0;
+  Skl1.re = a;
+  Skl1.im = b;
 }
 
 /*!
@@ -161,4 +161,20 @@ std::istream & operator >> (std::istream & strm, LZespolona & L)
     strm.setstate(std::ios_base::failbit);
 
   return strm;
+};
+
+/*
+  Umożliwia spradzenie, czy liczby zespolone są sobie rowne
+  Argumenty:
+     Skl1 - pierwszy skladnik porownywania,
+     Skl2 - drugi skladnik porownywania.
+  Zwraca:
+     Wartosc prawdziwa, gdy czesci uroone i rzeczywiste danej liczby sa rowne.
+*/
+bool operator == (LZespolona  Skl1,  LZespolona  Skl2)
+{
+  if ((Skl1.re == Skl2.re) && (Skl1.im == Skl2.im))
+    return true;
+  else
+    return false;
 };

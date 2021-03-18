@@ -22,6 +22,7 @@ struct  LZespolona {
  * Dalej powinny pojawic sie zapowiedzi definicji przeciazen operatorow
  */
 
+void Inicjalizuj(LZespolona & Skl1, double a, double b);
 LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona  operator - (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2);
@@ -31,10 +32,7 @@ LZespolona Sprzezenie(LZespolona Skl1);
 LZespolona  operator / (LZespolona  Skl1,  LZespolona Skl2);
 std::ostream & operator << (std::ostream & strm, const LZespolona & L);
 std::istream & operator >> (std::istream & strm, LZespolona & L);
-
-
-
-
+bool operator == (LZespolona  Skl1,  LZespolona  Skl2);
 
 
 #endif
