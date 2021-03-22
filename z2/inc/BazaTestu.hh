@@ -5,6 +5,7 @@
 #include "WyrazenieZesp.hh"
 
 
+
 /*
  * Modeluje pojecie baze testu z zestawem pytan w tablicy
  * oraz informacji o maksymalnej ilosci pytan, jak

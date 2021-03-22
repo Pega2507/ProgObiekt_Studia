@@ -1,6 +1,6 @@
 #include <iostream>
 #include "BazaTestu.hh"
-
+#include "Statystyka.hh"
 using namespace std;
 
 
@@ -25,22 +25,47 @@ int main(int argc, char **argv)
     return 1;
   }
 
-
-  
   cout << endl;
   cout << " Start testu arytmetyki zespolonej: " << argv[1] << endl;
   cout << endl;
 
   WyrazenieZesp   WyrZ_PytanieTestowe;
+  LZespolona Odpowiedz;
+  Statystyka LiczbaOdp={0, 0, 0};
   
-  while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
-    cout << " Czesc rzeczywista pierwszego argumentu: ";
-    cout << WyrZ_PytanieTestowe.Arg1.re << endl;
+  while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) 
+  {
+    Wyswietl(WyrZ_PytanieTestowe);
+    cout << "Twoja odpowiedz: ";
+    cin >> Odpowiedz;
+    while(cin.fail() && LiczbaOdp.ZleWpis < 3) 
+    {
+     cout <<"Zle wpisana liczba. Sprobuj ponownie: ";
+     LiczbaOdp.ZleWpis++;
+     cin.clear();
+     cin.ignore(1024, '\n');
+     cin >> Odpowiedz;
+    }
+
+    if (Odpowiedz == Oblicz(WyrZ_PytanieTestowe))
+    {
+      cout <<"Odpowiedz prawidlowa!" <<endl;
+      LiczbaOdp.PytDobrze++;
+    }
+    else
+    {
+      cout<<"Zle! Prawidlowa odpowiedz to " << Oblicz(WyrZ_PytanieTestowe)<<endl;
+      LiczbaOdp.PytZle++;
+    }
+    
+
+
   }
 
   
   cout << endl;
   cout << " Koniec testu" << endl;
+  WyswietlStat(LiczbaOdp);
   cout << endl;
 
 }
