@@ -17,10 +17,8 @@ int main(int argc, char **argv)
     return 1;
   }
 
-
-  BazaTestu   BazaT = { nullptr, 0, 0 };
-
-  if (InicjalizujTest(&BazaT,argv[1]) == false) {
+  BazaTestu Pytania;
+  if (Pytania.InicjalizujTest(argv[1]) == false) {
     cerr << " Inicjalizacja testu nie powiodla sie." << endl;
     return 1;
   }
@@ -29,15 +27,16 @@ int main(int argc, char **argv)
   cout << " Start testu arytmetyki zespolonej: " << argv[1] << endl;
   cout << endl;
 
-  WyrazenieZesp   WyrZ_PytanieTestowe;
+  WyrazenieZesp WyrZ_PytanieTestowe;
   LZespolona Odpowiedz;
   Statystyka LiczbaOdp={0, 0, 0};
   
-  while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) 
+  while (Pytania.PobierzNastpnePytanie(WyrZ_PytanieTestowe)) 
   {
     Wyswietl(WyrZ_PytanieTestowe);
     cout << "Twoja odpowiedz: ";
     cin >> Odpowiedz;
+    
     while(cin.fail() && LiczbaOdp.ZleWpis < 3) 
     {
      cout <<"Zle wpisana liczba. Sprobuj ponownie: ";

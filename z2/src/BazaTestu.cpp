@@ -23,40 +23,9 @@ static WyrazenieZesp  TestTrudny[] =
     {{42,87}, Op_Dziel, {21,9}},
   };
 
-
-
-
-
-/*
- * W bazie testu ustawia wybrany test jako biezacy test i indeks pytania
- * ustawia na pierwsze z nich.
- * Parametry:
- *    wskBazaTestu - wskaznik na zmienna reprezentujaca baze testu,
- *    wskTabTestu  - wskaznik na tablice zawierajaca wyrazenia arytmetyczne
- *                   bedace przedmiotem testu,
- *    IloscElemTab - ilosc pytan w tablicy.
- *   
- * Warunki wstepne:
- *      - Parametr wskBazaTestu nie moze byc pustym wskaznikiem. Musi zawierac adres
- *        zmiennej reprezentujacej baze testu, ktora wczesniej zostal poprawnie
- *        zainicjalizowany poprzez wywolanie funkcji InicjalizujTest.
- *      - Parametr wskTabTestu zawiera wskaznik na istniejaca tablice.
- *      - Parametr IloscPytan zawiera wartosc, ktora nie przekracza ilosci elementow
- *        w tablicy dostepnej poprzez wskTabTestu.
- */
-void UstawTest( BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned int IloscPytan )
-{
-  wskBazaTestu->wskTabTestu = wskTabTestu;
-  wskBazaTestu->IloscPytan = IloscPytan;
-  wskBazaTestu->IndeksPytania = 0;
-}
-
-
-
-
 /*
  * Inicjalizuje test kojarzac zmienna dostepna poprzez wskaznik wskBazaTestu
- * z dana tablica wyrazen, ktora reprezentuje jeden z dwoch dopuszczalnych 
+ * z dana tablica wyrazen, ktora reprezentuje jeden z dwoch dopuszczalnych
  * testow.
  * Parametry:
  *    wskBazaTestu - wskaznik na zmienna reprezentujaca baze testu.
@@ -67,20 +36,20 @@ void UstawTest( BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned in
  *        zmiennej reprezentujacej baze testu, ktora wczesniej zostal poprawnie
  *        zainicjalizowany poprzez wywolanie funkcji InicjalizujTest.
  *      - Parametr sNazwaTestu musi wskazywac na jedna z nazw tzn. "latwe" lub "trudne".
- *       
+ *
  * Zwraca:
  *       true - gdy operacja sie powiedzie i test zostanie poprawnie
  *              zainicjalizowany,
  *       false - w przypadku przeciwnym.
  */
-bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
+bool InicjalizujTest(const char *sNazwaTestu )
 {
   if (!strcmp(sNazwaTestu,"latwy")) {
-    UstawTest(wskBazaTestu,TestLatwy,sizeof(TestLatwy)/sizeof(WyrazenieZesp));
+    plik.open("latwy.dat",ios::in);
     return true;
   }
   if (!strcmp(sNazwaTestu,"trudny")) {
-    UstawTest(wskBazaTestu,TestTrudny,sizeof(TestTrudny)/sizeof(WyrazenieZesp));
+    plik.open("trudny.dat",ios::in);
     return true;
   }
 
@@ -109,11 +78,19 @@ bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
  *              przypisane nowe wyrazenie zespolone z bazy,
  *       false - w przypadku przeciwnym.
  */
-bool PobierzNastpnePytanie( BazaTestu  *wskBazaTestu, WyrazenieZesp *wskWyrazenie )
+bool PobierzNastpnePytanie(WyrazenieZesp *wskWyrazenie )
 {
-  if (wskBazaTestu->IndeksPytania >= wskBazaTestu->IloscPytan) return false;
+    while(1)
+    {
+    plik>>*wskWyrazenie;
+    if(plik.eof())
+        return false;
+    if(plik.good())
+        return true;
+    plik.clear();
+    plik.ignore(1024, '\n');
+    }
 
-  *wskWyrazenie = wskBazaTestu->wskTabTestu[wskBazaTestu->IndeksPytania];
-  ++wskBazaTestu->IndeksPytania;
+
   return true;
 }

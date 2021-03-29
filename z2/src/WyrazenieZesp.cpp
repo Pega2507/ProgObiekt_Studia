@@ -71,3 +71,32 @@ std::ostream & operator << (std::ostream & strm, const WyrazenieZesp & W)
     }
     std::cout << W.Arg1 << znak << W.Arg2 << std::endl;
 }
+
+std::istream & operator >> (std::istream & strm, WyrazenieZesp & W)
+{
+    strm>>W.Arg1;
+    char znak;
+    strm>>znak;
+    switch (znak)
+    {
+    case '+':
+        W.Op = Op_Dodaj;
+        break;
+
+    case '-':
+        W.Op = Op_Odejmij;
+        break;
+
+    case '*':
+        W.Op = Op_Mnoz;
+        break;
+
+    case '/':
+        W.Op = Op_Dziel;
+        break;
+    default:
+        strm.setstate(std::ios::failbit);
+    }
+    strm>>W.Arg2;
+    return strm;
+}

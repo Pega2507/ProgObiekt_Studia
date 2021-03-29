@@ -1,18 +1,25 @@
 //Aleksandra Machelak 259238
 #include "LZespolona.hh"
 
-/* 
+/*
   Funkcja inicjujaca liczbe zespolona
   Argumenty:
     Liczba zespolona Skl1
   Zwraca:
-    Liczbe zespolona Skl1 rowna 0
+    Liczbe zespolona Skl1 z a jako czesc rzeczywista
+    i b jako czesc urojona.
 */
-void Inicjalizuj(LZespolona & Skl1, double a, double b)
+/*void Inicjalizuj(LZespolona & Skl1, double a, double b)
 {
-  Skl1.re = a;
-  Skl1.im = b;
+  re = a;
+  im = b;
+}*/
+LZespolona::LZespolona(double a, double b)
+{
+  re = a;
+  im = b;
 }
+
 
 /*!
  * Realizuje dodanie dwoch liczb zespolonych.
@@ -22,12 +29,12 @@ void Inicjalizuj(LZespolona & Skl1, double a, double b)
  * Zwraca:
  *    Sume dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2)
+LZespolona LZespolona::operator + (LZespolona  Skl2)
 {
   LZespolona  Wynik;
 
-  Wynik.re = Skl1.re + Skl2.re;
-  Wynik.im = Skl1.im + Skl2.im;
+  Wynik.re = re + Skl2.re;
+  Wynik.im = im + Skl2.im;
   return Wynik;
 }
 
@@ -39,12 +46,12 @@ LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2)
  * Zwraca:
  *    Roznice dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona  operator - (LZespolona  Skl1,  LZespolona  Skl2)
+LZespolona LZespolona::operator - (LZespolona  Skl2)
 {
   LZespolona  Wynik;
 
-  Wynik.re = Skl1.re - Skl2.re;
-  Wynik.im = Skl1.im - Skl2.im;
+  Wynik.re = re - Skl2.re;
+  Wynik.im = im - Skl2.im;
   return Wynik;
 }
 /*!
@@ -56,12 +63,12 @@ LZespolona  operator - (LZespolona  Skl1,  LZespolona  Skl2)
  *    Iloczyn dwoch skladnikow przekazanych jako parametry.
  */
 
-LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2)
+LZespolona LZespolona::operator * (LZespolona  Skl2)
 {
   LZespolona  Wynik;
 
-  Wynik.re = Skl1.re * Skl2.re - Skl1.im * Skl2.im;
-  Wynik.im = Skl1.re * Skl2.im + Skl1.im * Skl2.re;
+  Wynik.re = re * Skl2.re - im * Skl2.im;
+  Wynik.im = re * Skl2.im + im * Skl2.re;
   return Wynik;
 }
 
@@ -73,12 +80,12 @@ LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2)
  * Zwraca:
  *   Iloraz dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona  operator / (LZespolona  Skl1,  double a)
+LZespolona LZespolona::operator / (double a)
 {
-  LZespolona  Wynik;
+  LZespolona Wynik;
 
-  Wynik.re = Skl1.re / a;
-  Wynik.im = Skl1.im /a;
+  Wynik.re = re / a;
+  Wynik.im = im /a;
   return Wynik;
 }
 
@@ -89,23 +96,28 @@ LZespolona  operator / (LZespolona  Skl1,  double a)
   Zwraca:
     modol Skl1 podniesiony do kwadratu
 */
-double Modul2(LZespolona Skl1)
+/*double Modul2(LZespolona Skl1)
 {
-  return Skl1.re*Skl1.re + Skl1.im*Skl1.im;
+  return re*re + im*im;
+} */
+
+double LZespolona::Modul2()
+{
+  return re*re + im*im;
 }
 
 /*
-  Tworzy sprzezenie liczby zespolonej zmieniajac znak 
+  Tworzy sprzezenie liczby zespolonej zmieniajac znak
   czesci urojonej danej liczby
   Argumenty:
     Skl1 - liczba zespolona
   Zwraca:
     sprzezona liczbe Skl1
 */
-LZespolona Sprzezenie(LZespolona Skl1)
+LZespolona LZespolona::Sprzezenie()
 {
-  Skl1.im = -Skl1.im;
-  return Skl1;
+  im = -im;
+  return *this;
 }
 
 /*!
@@ -116,52 +128,10 @@ LZespolona Sprzezenie(LZespolona Skl1)
  * Zwraca:
  *    Iloraz dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona  operator / (LZespolona  Skl1,  LZespolona Skl2)
+LZespolona LZespolona::operator / (LZespolona Skl2)
 {
-  return Skl1*Sprzezenie(Skl2)/Modul2(Skl2);
+  return *this*Skl2.Sprzezenie()/Skl2.Modul2();
 }
-
-/*
-  Umożliwia poprawne wypisanie liczby zespolonej na strumieniu wyjscia.
-  Argumenty: 
-    strm - strumien wyjscia
-    L - zapisywana liczba zespolona
-  Zwraca:
-    strumien wyjscia z liczba zespolona w postaci (x+yi) 
-    (gdzie x to czesc rzeczywista a y - urojona)
-*/
-std::ostream & operator << (std::ostream & strm, const LZespolona & L)
-{
-  strm << "(" << L.re << std::showpos << L.im << std::noshowpos << "i)";
-  return strm;
-};
-
-/*
-  Umożliwia poprawne wpisanie liczby zespolonej do struktury.
-  Argumenty: 
-    strm - strumien wejscia
-    L - zapisywana liczba zespolona
-  Zwraca:
-    strumien wejscia z liczba zespolona zapisana w strukturze L
-
-*/
-std::istream & operator >> (std::istream & strm, LZespolona & L)
-{
-  char znak;
-  strm >> znak;
-  if (znak != '(')
-    strm.setstate(std::ios_base::failbit);
-  strm >> L.re; 
-  strm >> L.im;
-  strm >> znak;
-  if (znak != 'i')
-    strm.setstate(std::ios_base::failbit);
-  strm >> znak;
-  if (znak != ')')
-    strm.setstate(std::ios_base::failbit);
-
-  return strm;
-};
 
 /*
   Umożliwia spradzenie, czy liczby zespolone są sobie rowne
@@ -171,18 +141,64 @@ std::istream & operator >> (std::istream & strm, LZespolona & L)
   Zwraca:
      Wartosc prawdziwa, gdy czesci uroone i rzeczywiste danej liczby sa rowne.
 */
-bool operator == (LZespolona  Skl1,  LZespolona  Skl2)
+bool LZespolona::operator == (LZespolona  Skl2)
 {
-  if ((Skl1.re == Skl2.re) && (Skl1.im == Skl2.im))
+  if ((re == Skl2.re) && (im == Skl2.im))
     return true;
   else
     return false;
 };
 
-bool operator != (LZespolona  Skl1,  LZespolona  Skl2)
+bool LZespolona::operator != (LZespolona  Skl2)
 {
-  if ((Skl1.re != Skl2.re) && (Skl1.im != Skl2.im))
+  if ((re != Skl2.re) && (im != Skl2.im))
     return true;
   else
     return false;
+};
+
+/*
+  Umożliwia poprawne wypisanie liczby zespolonej na strumieniu wyjscia.
+  Argumenty:
+    strm - strumien wyjscia
+    L - zapisywana liczba zespolona
+  Zwraca:
+    strumien wyjscia z liczba zespolona w postaci (x+yi)
+    (gdzie x to czesc rzeczywista a y - urojona)
+*/
+std::ostream & operator << (std::ostream & strm, const LZespolona & L)
+{
+  strm << "(" << L.get_re() << std::showpos << L.get_im() << std::noshowpos << "i)";
+  return strm;
+};
+
+/*
+  Umożliwia poprawne wpisanie liczby zespolonej do struktury.
+  Argumenty:
+    strm - strumien wejscia
+    L - zapisywana liczba zespolona
+  Zwraca:
+    strumien wejscia z liczba zespolona zapisana w strukturze L
+
+*/
+std::istream & operator >> (std::istream & strm, LZespolona & L)
+{
+  char znak;
+  double _re;
+  double _im;
+  strm >> znak;
+  if (znak != '(')
+    strm.setstate(std::ios_base::failbit);
+  strm >> _re;
+  strm >> _im;
+  L.set_re(_re);
+  L.set_im(_im);
+  strm >> znak;
+  if (znak != 'i')
+    strm.setstate(std::ios_base::failbit);
+  strm >> znak;
+  if (znak != ')')
+    strm.setstate(std::ios_base::failbit);
+
+  return strm;
 };

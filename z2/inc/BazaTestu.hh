@@ -3,7 +3,7 @@
 
 
 #include "WyrazenieZesp.hh"
-
+#include <fstream>
 
 
 /*
@@ -12,20 +12,19 @@
  * tez indeksem nastepnego pytania, ktore ma byc pobrane
  * z bazy.
  */
-struct BazaTestu {
-  WyrazenieZesp  *wskTabTestu;   /* Wskaznik na tablice zawierajaca pytania testu */
-  unsigned int    IloscPytan;    /* Ilosc wszystkich pytan */
-  unsigned int    IndeksPytania; /* Numer pytania, ktore ma byc pobrane jako nastepne */
+class BazaTestu {
+private:
+  WyrazenieZesp *wskTabTestu;   /* Wskaznik na tablice zawierajaca pytania testu */
+  unsigned int IloscPytan;    /* Ilosc wszystkich pytan */
+  unsigned int IndeksPytania; /* Numer pytania, ktore ma byc pobrane jako nastepne */
+  std::fstream plik;
+public:
+  BazaTestu(std::nullptr_t name=nullptr, int a=0, int b=0);
+  bool InicjalizujTest(const char*  sNazwaTestu);
+  bool PobierzNastpnePytanie(WyrazenieZesp *wskWyr);
+  void UstawTest(WyrazenieZesp *wskTabTestu, unsigned int IloscPytan);
+
 };
-
-
-/*
- * Inicjalizuje test powiazany z dana nazwa.
- */
-bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char*  sNazwaTestu );
-/*
- * Udostepnia nastepne pytanie z bazy.
- */
-bool PobierzNastpnePytanie( BazaTestu  *wskBazaTestu,  WyrazenieZesp *wskWyr );
+ 
 
 #endif
