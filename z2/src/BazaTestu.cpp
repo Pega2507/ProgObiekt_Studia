@@ -5,23 +5,13 @@
 
 using namespace std;
 
-/*
- * Tablica, ktora jest widoczna tylko w tym module.
- * Zawiera ona tresc latwego testu.
- */
-static WyrazenieZesp  TestLatwy[] =
-  { {{2,1}, Op_Dodaj, {1,2}},
-    {{1,0}, Op_Odejmij, {0,1}},
-    {{3,0}, Op_Mnoz, {0,3}},
-    {{4,8}, Op_Dziel, {1,0}},
-  };
 
-static WyrazenieZesp  TestTrudny[] =
-  { {{22,41}, Op_Dodaj, {31,27}},
-    {{81,23}, Op_Odejmij, {15,12}},
-    {{38,27}, Op_Mnoz, {42,3}},
-    {{42,87}, Op_Dziel, {21,9}},
-  };
+BazaTestu::BazaTestu ()
+{
+  wskTabTestu = 0;
+  IloscPytan = 0;
+  IndeksPytania = 0;
+}
 
 /*
  * Inicjalizuje test kojarzac zmienna dostepna poprzez wskaznik wskBazaTestu
@@ -42,7 +32,8 @@ static WyrazenieZesp  TestTrudny[] =
  *              zainicjalizowany,
  *       false - w przypadku przeciwnym.
  */
-bool InicjalizujTest(const char *sNazwaTestu )
+
+bool BazaTestu::InicjalizujTest(const char *sNazwaTestu )
 {
   if (!strcmp(sNazwaTestu,"latwy")) {
     plik.open("latwy.dat",ios::in);
@@ -78,7 +69,7 @@ bool InicjalizujTest(const char *sNazwaTestu )
  *              przypisane nowe wyrazenie zespolone z bazy,
  *       false - w przypadku przeciwnym.
  */
-bool PobierzNastpnePytanie(WyrazenieZesp *wskWyrazenie )
+bool BazaTestu::PobierzNastpnePytanie(WyrazenieZesp *wskWyrazenie )
 {
     while(1)
     {

@@ -147,7 +147,7 @@ bool LZespolona::operator == (LZespolona  Skl2)
     return true;
   else
     return false;
-};
+}
 
 bool LZespolona::operator != (LZespolona  Skl2)
 {
@@ -155,7 +155,7 @@ bool LZespolona::operator != (LZespolona  Skl2)
     return true;
   else
     return false;
-};
+}
 
 /*
   Umożliwia poprawne wypisanie liczby zespolonej na strumieniu wyjscia.
@@ -170,7 +170,7 @@ std::ostream & operator << (std::ostream & strm, const LZespolona & L)
 {
   strm << "(" << L.get_re() << std::showpos << L.get_im() << std::noshowpos << "i)";
   return strm;
-};
+}
 
 /*
   Umożliwia poprawne wpisanie liczby zespolonej do struktury.
@@ -201,4 +201,4 @@ std::istream & operator >> (std::istream & strm, LZespolona & L)
     strm.setstate(std::ios_base::failbit);
 
   return strm;
-};
+}

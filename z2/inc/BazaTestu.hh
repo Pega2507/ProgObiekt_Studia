@@ -19,7 +19,7 @@ private:
   unsigned int IndeksPytania; /* Numer pytania, ktore ma byc pobrane jako nastepne */
   std::fstream plik;
 public:
-  BazaTestu(std::nullptr_t name=nullptr, int a=0, int b=0);
+  BazaTestu();
   bool InicjalizujTest(const char*  sNazwaTestu);
   bool PobierzNastpnePytanie(WyrazenieZesp *wskWyr);
   void UstawTest(WyrazenieZesp *wskTabTestu, unsigned int IloscPytan);

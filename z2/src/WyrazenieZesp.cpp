@@ -1,10 +1,16 @@
 #include "WyrazenieZesp.hh"
 
-void Wyswietl(WyrazenieZesp WyrZ)
+WyrazenieZesp::WyrazenieZesp()
+{
+    Arg1 = 0;
+    Arg2 = 0;
+}
+
+void WyrazenieZesp::Wyswietl()
 {
     char znak;
 
-    switch (WyrZ.Op)
+    switch (Op)
     {
     case Op_Dodaj:
         znak = '+';
@@ -22,27 +28,27 @@ void Wyswietl(WyrazenieZesp WyrZ)
         znak = '/';
         break;
     }
-    std::cout << WyrZ.Arg1 << znak << WyrZ.Arg2 << std::endl;
+    std::cout << Arg1 << znak << Arg2 << std::endl;
 }
 
-LZespolona Oblicz(WyrazenieZesp  WyrZ)
+LZespolona WyrazenieZesp::Oblicz()
 {
-    switch (WyrZ.Op)
+    switch (Op)
     {
     case Op_Dodaj:
-        return WyrZ.Arg1 + WyrZ.Arg2;
+        return Arg1 + Arg2;
         break;
 
     case Op_Odejmij:
-        return WyrZ.Arg1 - WyrZ.Arg2;
+        return Arg1 - Arg2;
         break;
 
     case Op_Mnoz:
-        return WyrZ.Arg1 * WyrZ.Arg2;
+        return Arg1 * Arg2;
         break;
 
     case Op_Dziel:
-        return WyrZ.Arg1 / WyrZ.Arg2;
+        return Arg1 / Arg2;
         break;
     }
 }
@@ -50,8 +56,12 @@ LZespolona Oblicz(WyrazenieZesp  WyrZ)
 std::ostream & operator << (std::ostream & strm, const WyrazenieZesp & W)
 {
     char znak;
-
-    switch (W.Op)
+    Operator _Op;
+    LZespolona _Arg1, _Arg2;
+    _Op = W.get_Op();
+    _Arg1 = W.get_Arg1();
+    _Arg2 = W.get_Arg2();
+    switch (_Op)
     {
     case Op_Dodaj:
         znak = '+';
@@ -69,34 +79,40 @@ std::ostream & operator << (std::ostream & strm, const WyrazenieZesp & W)
         znak = '/';
         break;
     }
-    std::cout << W.Arg1 << znak << W.Arg2 << std::endl;
+    std::cout << _Arg1 << znak << _Arg2 << std::endl;
+    return strm;
 }
 
 std::istream & operator >> (std::istream & strm, WyrazenieZesp & W)
 {
-    strm>>W.Arg1;
+    Operator _Op;
+    LZespolona _Arg1, _Arg2;
     char znak;
+    strm>>_Arg1;
+    W.set_Arg1(_Arg1);
     strm>>znak;
     switch (znak)
     {
     case '+':
-        W.Op = Op_Dodaj;
+        _Op = Op_Dodaj;
         break;
 
     case '-':
-        W.Op = Op_Odejmij;
+        _Op = Op_Odejmij;
         break;
 
     case '*':
-        W.Op = Op_Mnoz;
+        _Op = Op_Mnoz;
         break;
 
     case '/':
-        W.Op = Op_Dziel;
+        _Op = Op_Dziel;
         break;
     default:
         strm.setstate(std::ios::failbit);
     }
-    strm>>W.Arg2;
+    W.set_Op(_Op);
+    strm>>_Arg2;
+    W.set_Arg2(_Arg2);
     return strm;
 }

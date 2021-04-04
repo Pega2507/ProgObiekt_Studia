@@ -29,32 +29,27 @@ int main(int argc, char **argv)
 
   WyrazenieZesp WyrZ_PytanieTestowe;
   LZespolona Odpowiedz;
-  Statystyka LiczbaOdp={0, 0, 0};
+  Statystyka LiczbaOdp;
   
-  while (Pytania.PobierzNastpnePytanie(WyrZ_PytanieTestowe)) 
+  while (Pytania.PobierzNastpnePytanie(&WyrZ_PytanieTestowe)) 
   {
-    Wyswietl(WyrZ_PytanieTestowe);
+    WyrZ_PytanieTestowe.Wyswietl();
     cout << "Twoja odpowiedz: ";
     cin >> Odpowiedz;
-    
-    while(cin.fail() && LiczbaOdp.ZleWpis < 3) 
-    {
-     cout <<"Zle wpisana liczba. Sprobuj ponownie: ";
-     LiczbaOdp.ZleWpis++;
-     cin.clear();
-     cin.ignore(1024, '\n');
-     cin >> Odpowiedz;
-    }
+    LiczbaOdp.WpisywanieOdp(Odpowiedz);
 
-    if (Odpowiedz == Oblicz(WyrZ_PytanieTestowe))
+    cout << "Twoja odp: " <<Odpowiedz<<endl;
+
+
+    if (Odpowiedz == WyrZ_PytanieTestowe.Oblicz())
     {
       cout <<"Odpowiedz prawidlowa!" <<endl;
-      LiczbaOdp.PytDobrze++;
+      LiczbaOdp.DobraOdp();
     }
     else
     {
-      cout<<"Zle! Prawidlowa odpowiedz to " << Oblicz(WyrZ_PytanieTestowe)<<endl;
-      LiczbaOdp.PytZle++;
+      cout<<"Zle! Prawidlowa odpowiedz to " << WyrZ_PytanieTestowe.Oblicz()<<endl;
+      LiczbaOdp.ZlaOdp();
     }
     
 
@@ -64,7 +59,7 @@ int main(int argc, char **argv)
   
   cout << endl;
   cout << " Koniec testu" << endl;
-  WyswietlStat(LiczbaOdp);
+  LiczbaOdp.WyswietlStat();
   cout << endl;
 
 }
