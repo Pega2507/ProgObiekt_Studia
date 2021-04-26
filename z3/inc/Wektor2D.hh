@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <vector>
+#include <math.h>
+
+#define PI 3.14
 
 /*
  *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
@@ -14,11 +17,11 @@ private:
   std::vector <double > xy;
 
 public:
-  const Wektor2D & operator +(const Wektor2D &arg2) const;   
-  const Wektor2D & operator -(const Wektor2D &arg2) const; 
-  const Wektor2D & operator *(double arg2) const;
-  const Wektor2D & operator /(double arg2) const; 
-  const Wektor2D & operator *(const Wektor2D &arg2) const;
+   Wektor2D & operator +(const Wektor2D &arg2) ;   
+   Wektor2D & operator -(const Wektor2D &arg2) ; 
+   Wektor2D & operator *(double arg2);
+   Wektor2D & operator /(double arg2); 
+   double operator *(const Wektor2D &arg2);
   Wektor2D ();
   Wektor2D (double x, double y);
   double &operator[] (int ind);

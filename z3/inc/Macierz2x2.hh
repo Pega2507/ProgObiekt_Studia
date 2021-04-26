@@ -2,11 +2,7 @@
 #define MACIERZ2X2_HH
 
 #include <iostream>
-#include <vector>
-#include <math.h>
 #include "Wektor2D.hh"
-
-#define PI 3.14
 
 
 /*
@@ -18,9 +14,8 @@ class MacierzRot2D
 private:
   std::vector <std::vector <double>> mac;
 public:
-  //const MacierzRot2D & operator * (const MacierzRot2D &arg2) const;
-  const Wektor2D  operator * (const Wektor2D & Punkt) const;
-  MacierzRot2D (double kat);
+  const Wektor2D  operator * (const Wektor2D & Punkt) const; //m.in obrot punktu
+  MacierzRot2D (double kat_stopnie);
   const double  &operator()(int ind_x,int ind_y) const; 
 
 };
