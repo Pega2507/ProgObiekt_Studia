@@ -12,15 +12,15 @@ Wektor2D::Wektor2D(double x, double y)
     xy.push_back(y);
 }
 
- Wektor2D &Wektor2D::operator+(const Wektor2D &arg2) 
+ Wektor2D Wektor2D::operator+(const Wektor2D &arg2) 
 {
     Wektor2D Wynik;
-    Wynik[0] = xy[0] + arg2[0];
+   Wynik[0] = xy[0] + arg2[0];
     Wynik[1] = xy[1] + arg2[1];
     return Wynik;
 }
 
- Wektor2D &Wektor2D::operator-(const Wektor2D &arg2) 
+ Wektor2D Wektor2D::operator-(const Wektor2D &arg2) 
 {
     Wektor2D Wynik;
     Wynik[0] = xy[0] - arg2[0];
@@ -28,7 +28,7 @@ Wektor2D::Wektor2D(double x, double y)
     return Wynik;
 }
 
-Wektor2D &Wektor2D::operator*(double arg2)
+Wektor2D Wektor2D::operator*(double arg2)
 {
     Wektor2D Wynik;
     Wynik[0] = xy[0] * arg2;
@@ -36,7 +36,7 @@ Wektor2D &Wektor2D::operator*(double arg2)
     return Wynik;
 }
 
-Wektor2D &Wektor2D::operator/(double arg2)
+Wektor2D Wektor2D::operator/(double arg2)
 {
     Wektor2D Wynik;
     Wynik[0] = xy[0] / arg2;

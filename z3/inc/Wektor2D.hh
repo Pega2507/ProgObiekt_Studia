@@ -17,10 +17,10 @@ private:
   std::vector <double > xy;
 
 public:
-   Wektor2D & operator +(const Wektor2D &arg2) ;   
-   Wektor2D & operator -(const Wektor2D &arg2) ; 
-   Wektor2D & operator *(double arg2);
-   Wektor2D & operator /(double arg2); 
+   Wektor2D operator +(const Wektor2D &arg2) ;   
+   Wektor2D operator -(const Wektor2D &arg2) ; 
+   Wektor2D operator *(double arg2);
+   Wektor2D operator /(double arg2); 
    double operator *(const Wektor2D &arg2);
   Wektor2D ();
   Wektor2D (double x, double y);

@@ -30,6 +30,7 @@ Prostokat::Prostokat(Wektor2D LG, Wektor2D PG, Wektor2D LD, Wektor2D PD)
 void Prostokat::przesun(Wektor2D &P)
 {
     w[0][0] = P + w[0][0];
+  
     w[0][1] = P + w[0][1];
     w[1][0] = P + w[1][0];
     w[1][1] = P + w[1][1];
