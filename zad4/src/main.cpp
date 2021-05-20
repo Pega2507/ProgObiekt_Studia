@@ -41,77 +41,13 @@ using namespace std;
  * \retval false - w przypadku przeciwnym.
  */
 void PrzykladZapisuWspolrzednychDoStrumienia( ostream&     StrmWy, 
-                                              double       Przesuniecie
+                                              Prostopadloscian       Przesuniecie
                                             )
 {
-   //---------------------------------------------------------------
-   // To tylko przyklad !!!
-   // W programie nalezy uzywać pojęcia wektora, a nie oddzielnych 
-   // zmiennych do reprezentowania wspolrzednych!
-   //
-  double  x1, y1, z1;
 
-  x1 = y1 = z1 = Przesuniecie;
-
-  StrmWy << setw(16) << fixed << setprecision(10) << x1
-         << setw(16) << fixed << setprecision(10) << y1
-         << setw(16) << fixed << setprecision(10) << z1 
-         << endl;
-
-  StrmWy << setw(16) << fixed << setprecision(10) << x1+DL_BOKU
-         << setw(16) << fixed << setprecision(10) << y1
-         << setw(16) << fixed << setprecision(10) << z1 
-         << endl;
-
-  StrmWy << endl;
-
-  StrmWy << setw(16) << fixed << setprecision(10) << x1
-         << setw(16) << fixed << setprecision(10) << y1+DL_BOKU
-         << setw(16) << fixed << setprecision(10) << z1 
-         << endl;
-
-  StrmWy << setw(16) << fixed << setprecision(10) << x1+DL_BOKU
-         << setw(16) << fixed << setprecision(10) << y1+DL_BOKU
-         << setw(16) << fixed << setprecision(10) << z1 
-         << endl;
-
-  StrmWy << endl;
-
-  StrmWy << setw(16) << fixed << setprecision(10) << x1
-         << setw(16) << fixed << setprecision(10) << y1+DL_BOKU
-         << setw(16) << fixed << setprecision(10) << z1+DL_BOKU 
-         << endl;
-
-  StrmWy << setw(16) << fixed << setprecision(10) << x1+DL_BOKU
-         << setw(16) << fixed << setprecision(10) << y1+DL_BOKU
-         << setw(16) << fixed << setprecision(10) << z1+DL_BOKU 
-         << endl;
-
-  StrmWy << endl;
-
-  StrmWy << setw(16) << fixed << setprecision(10) << x1
-         << setw(16) << fixed << setprecision(10) << y1
-         << setw(16) << fixed << setprecision(10) << z1+DL_BOKU 
-         << endl;
-
-  StrmWy << setw(16) << fixed << setprecision(10) << x1+DL_BOKU
-         << setw(16) << fixed << setprecision(10) << y1
-         << setw(16) << fixed << setprecision(10) << z1+DL_BOKU 
-         << endl;
-
-  StrmWy << endl;
- 
-  StrmWy << setw(16) << fixed << setprecision(10) << x1
-         << setw(16) << fixed << setprecision(10) << y1
-         << setw(16) << fixed << setprecision(10) << z1 
-         << endl;
-
-  StrmWy << setw(16) << fixed << setprecision(10) << x1+DL_BOKU
-         << setw(16) << fixed << setprecision(10) << y1
-         << setw(16) << fixed << setprecision(10) << z1 
-         << endl;
-                             // Jeszcze raz zapisujemy pierwsze dwa wierzcholki,
-                             // aby gnuplot narysowal zamkniętą powierzchnie.
+  StrmWy << Przesuniecie;
+    StrmWy << Przesuniecie[0];
+      StrmWy << Przesuniecie[1];
 }
 
 
@@ -129,7 +65,7 @@ void PrzykladZapisuWspolrzednychDoStrumienia( ostream&     StrmWy,
  * \retval false - w przypadku przeciwnym.
  */
 bool PrzykladZapisuWspolrzednychDoPliku( const char  *sNazwaPliku,
-                                         double       Przesuniecie
+                                         Prostopadloscian       Przesuniecie
                                        )
 {
   ofstream  StrmPlikowy;
@@ -163,12 +99,13 @@ void WyswOpcje()
 
 int main()
 {
-  Prostopadloscian             Pr;   // To tylko przykladowe definicje zmiennej
   PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
                                 // rysunku prostokata
   char wybor;
   string os;
   double kat, il_obrotow;
+  Wektor3D wierz[8];
+  Macierz3x3 Macierz_obrotu;
    //-------------------------------------------------------
    //  Wspolrzedne wierzcholkow beda zapisywane w pliku "prostokat.dat"
    //  Ponizsze metody powoduja, ze dane z pliku beda wizualizowane
@@ -188,23 +125,13 @@ int main()
   Lacze.UstawZakresX(-155,155);
   Lacze.UstawZakresZ(-155,155);
 
-  
-  PrzykladZapisuWspolrzednychDoStrumienia(cout,0);
-  if (!PrzykladZapisuWspolrzednychDoPliku("prostopadloscian.dat",0)) return 1;
-  Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
-  cout << "Naciśnij ENTER, aby kontynuowac" << endl;
-  cin.ignore(10000,'\n');
+cout << "Podaj wierzcholki prostopadloscianu: " << endl;
+for (int i = 0; i < 8; i++)
+       cin >> wierz[i];
 
-   //----------------------------------------------------------
-   // Ponownie wypisuje wspolrzedne i rysuje prostokąt w innym miejscu.
-   //
-  PrzykladZapisuWspolrzednychDoStrumienia(cout,50);
-  if (!PrzykladZapisuWspolrzednychDoPliku("prostopadloscian.dat",50)) return 1;
-  Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
-  cout << "Naciśnij ENTER, aby kontynuowac" << endl;
-  cin.ignore(10000,'\n');
-
-
+Prostopadloscian Pr (wierz[0], wierz[1], wierz[3], wierz[4], 
+              wierz[6], wierz[7], wierz[4], wierz[5]);
+Wektor3D wek;
   while (wybor != 'k')
        {
               if (Pr.BokiRowne() == 0)
@@ -225,12 +152,23 @@ int main()
                      cin >> il_obrotow;
                      cout << "Podaj os obrotu: ";
                      cin >> os;
-                     Pr.obroc(kat * il_obrotow);
+                     Pr.obroc(kat * il_obrotow, os);
+                     break;
+              case 't':
+                     Pr.obroc(kat * il_obrotow, os);
+                     break;
+              case 'r':
+                     cout << Macierz_obrotu;
                      break;
               case 'p':
                      cout << "Podaj wektor przesuniecia: ";
-                     cin >> Wektor<3>;
-                     Pr.przesun(Wektor<3>);
+                     cin >> wek;
+                     Pr.przesun(wek);
+                     break;
+              case 's':
+                     cout<<"Sprawdzenie rownych bokow. "<<endl;
+                     if(Pr.BokiRowne() == 1)
+                            cout<<"Boki sa rowne"<<endl;
                      break;
               case 'w':
                      cout << "Wierzcholki prostopadloscianu: " << endl;

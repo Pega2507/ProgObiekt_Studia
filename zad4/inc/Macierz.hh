@@ -2,7 +2,11 @@
 #define MACIERZ_HH
 
 #include <iostream>
+#include <cmath>
 #include "Wektor.hh"
+
+#define PI 3.14
+
 
 /*!
  * \file
@@ -28,13 +32,13 @@ public:
   Wektor<Wymiar> operator*(const Wektor<Wymiar> &Punkt); //m.in obrot punktu
   Wektor<Wymiar> operator*(const Macierz<Wymiar> &Macierz2);
   Macierz();
-  Macierz(double kat, string os);
+  Macierz(double kat,  std::string os);
   const double &operator()(int ind_x, int ind_y) const;
 };
 
 
 template <int Wymiar>
-Macierz<Wymiar>::Macierz(double kat, string os)
+Macierz<Wymiar>::Macierz(double kat,  std::string os)
 {
   double rad = kat * PI / 180;
   if (Wymiar == 2)
@@ -67,7 +71,7 @@ Macierz<Wymiar>::Macierz(double kat, string os)
     if (os == "y" || os == "Y")
     {
       mac[0][0] = cos(rad);
-      mac[0][1] = 0
+      mac[0][1] = 0;
       mac[0][2] = sin(rad);
       mac[1][0] = 0;
       mac[1][1] = 1;
@@ -151,11 +155,16 @@ const double &Macierz<Wymiar>::operator()(int ind_x, int ind_y) const
  *    ~bk/edu/kpo/zalecenia.txt 
  */
 template <int Wymiar>
-inline std::ostream &operator<<(std::ostream &Strm, const Macierz<Wymiar> &Wek)
+inline std::ostream &operator<<(std::ostream &Strm, const Macierz<Wymiar> &Mac)
 {
-  /*!
-   * Zawartość powinna być przeróbką przeciążenia dla klasy Macierz2x2
-   */
+  for (int i = 0; i < Wymiar; i++)
+  {
+    for (int j = 0; j < Wymiar; j++)
+    {
+      std::cout<< Mac(i,j) << "  ";
+    }
+    std::cout<<std::endl;
+  }
   return Strm;
 }
 
