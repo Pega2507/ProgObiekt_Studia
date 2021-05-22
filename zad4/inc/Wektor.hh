@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include <vector>
-
+#include <math.h>
+#include <string>
 
 /*!
  * \file
@@ -94,14 +95,14 @@ double Wektor<Wymiar>::operator*(const Wektor<Wymiar> &arg2)
 template <int Wymiar>
 const double &Wektor<Wymiar>::operator[](int ind) const
 {
-    if (ind < 0 || ind > 1)
+    if (ind < 0 || ind > Wymiar)
         std::cerr << "Odwolanie poza pamiec!" << std::endl;
     return xy[ind];
 }
 template <int Wymiar>
 double &Wektor<Wymiar>::operator[](int ind)
 {
-    if (ind < 0 || ind > 1)
+    if (ind < 0 || ind > Wymiar)
         std::cerr << "Odwolanie poza pamiec!" << std::endl;
     return xy[ind];
 }
@@ -117,7 +118,6 @@ double &Wektor<Wymiar>::operator[](int ind)
  *    ~bk/edu/kpo/zalecenia.txt 
  */
 template <int Wymiar>
-inline
 std::istream& operator >> (std::istream &Strm, Wektor<Wymiar> &Wek)
 {
   for (int i = 0; i < Wymiar; i++)
@@ -135,7 +135,6 @@ std::istream& operator >> (std::istream &Strm, Wektor<Wymiar> &Wek)
  *    ~bk/edu/kpo/zalecenia.txt 
  */
 template <int Wymiar>
-inline
 std::ostream& operator << (std::ostream &Strm, const Wektor<Wymiar> &Wek)
 {
   for (int i = 0; i < Wymiar; i++)
@@ -144,4 +143,7 @@ std::ostream& operator << (std::ostream &Strm, const Wektor<Wymiar> &Wek)
   return Strm;  
 }
 
+template class Wektor<3>;
+template std::istream& operator >> (std::istream &Strm, Wektor<3> &Wek);
+template std::ostream& operator << (std::ostream &Strm, const Wektor<3> &Wek);
 #endif

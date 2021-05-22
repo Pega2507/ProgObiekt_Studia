@@ -1,34 +1,37 @@
-#ifndef PROSTOKAT_HH
-#define PROSTOKAT_HH
+#ifndef PROSTOPADLOSCIAN_HH
+#define PROSTOPADLOSCIAN_HH
 
 #include <iostream>
+#include "Wektor.hh"
+#include "Wektor3D.hh"
+#include "Macierz3x3.hh"
 
 
-/*
- *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
- *  i jakie ma glowne cechy.
- */
+
+  //mogę tu od razu dać 3?
 class Prostopadloscian {
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
-   */
-  public:
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
-   */    
+private:
+  std::vector< Wektor3D> w;
+
+public:
+Prostopadloscian(){};
+  Prostopadloscian(Wektor3D PLD, Wektor3D PPD, Wektor3D PLG, Wektor3D PPG,
+                   Wektor3D SLD, Wektor3D SPD, Wektor3D SLG, Wektor3D SPG);
+  void przesun( Wektor3D   & P);
+  void obroc (double kat,  std::string os);
+  void WysWierzcholki();
+  bool BokiRowne(); // zwraca 1 gdy boki sa rowne
+  const  Wektor3D  &operator[](int ind) const; 
+   Wektor3D  &operator[](int ind) ; 
 };
 
 
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- */
-std::ostream& operator << ( std::ostream       &Strm, 
-                            const Prostopadloscian    &Pr
-                          );
-
-
+std::ostream &operator<<(std::ostream &Strm, const Prostopadloscian    &Pr)
+{
+    for (int i = 0; i < 8; i++)
+    {
+            Strm << Pr[i] << std::endl;
+    }
+    return Strm;
+}
 #endif
