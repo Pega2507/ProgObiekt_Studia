@@ -129,7 +129,7 @@ cout << "Podaj wierzcholki prostopadloscianu: " << endl;
 for (int i = 0; i < 8; i++)
        cin >> wierz[i];
 
-Prostopadloscian Pr (wierz[0], wierz[1], wierz[3], wierz[4], 
+Prostopadloscian Pr (wierz[0], wierz[1], wierz[2], wierz[3], 
               wierz[6], wierz[7], wierz[4], wierz[5]);
 Wektor3D wek;
   while (wybor != 'k')

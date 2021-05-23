@@ -54,9 +54,9 @@ Macierz<Wymiar>::Macierz(double kat,  std::string os)
   }
   if (Wymiar == 3)
   {
-    mac.resize(2);
-    for (int i = 0; i < 2; i++)
-      mac[i].resize(2);
+    mac.resize(3);
+    for (int i = 0; i < 3; i++)
+      mac[i].resize(3);
     if (os == "x" || os == "X")
     {
       mac[0][0] = cos(rad);
@@ -93,22 +93,30 @@ Macierz<Wymiar>::Macierz(double kat,  std::string os)
       mac[2][1] = sin(rad);
       mac[2][2] = cos(rad);
     }
+    }
     else
       std::cerr<<"Niewlasciwy rozmiar macierzy obrotu"<<std::endl;
 
-  }
+  
 }
 
 template <int Wymiar>
-Macierz<Wymiar>::Macierz()
+Macierz<Wymiar>::Macierz() 
 {
 
   mac.resize(Wymiar);
   for (int i = 0; i < Wymiar; i++)
     mac[i].resize(Wymiar);
   for (int i = 0; i < Wymiar; i++)
+  {
     for (int j = 0; j < Wymiar; j++)
-      mac[i][j] = 0;
+      {
+        if (i==j)
+          mac[i][j] = 1;
+        else
+          mac[i][j] = 0;
+      }
+  }
 }
 
 template <int Wymiar>

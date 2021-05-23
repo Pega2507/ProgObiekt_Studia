@@ -26,12 +26,6 @@ Prostopadloscian(){};
 };
 
 
-std::ostream &operator<<(std::ostream &Strm, const Prostopadloscian    &Pr)
-{
-    for (int i = 0; i < 8; i++)
-    {
-            Strm << Pr[i] << std::endl;
-    }
-    return Strm;
-}
+std::ostream &operator<<(std::ostream &Strm, const Prostopadloscian    &Pr);
+
 #endif

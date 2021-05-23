@@ -15,9 +15,9 @@ Prostopadloscian::Prostopadloscian(Wektor3D PLD, Wektor3D PPD, Wektor3D PLG, Wek
     w[2] = PPG;
     w[3] = PLG;
     w[4] = SLG;
-    w[5] = SLD;
+    w[5] = SPG;
     w[6] = SPD;
-    w[7] = SPG;
+    w[7] = SLD;
     
 }
 
@@ -34,7 +34,7 @@ void Prostopadloscian   ::przesun( Wektor3D   &P)
 void Prostopadloscian::obroc(double kat,  std::string os)
 {
      Macierz3x3 m(kat, os);
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 8; i++)
         w[i] = m * w[i];
 }
 
@@ -69,6 +69,15 @@ bool Prostopadloscian   ::BokiRowne() //nie zrbione!
     else
         return 0;
     
+}
+
+std::ostream &operator<<(std::ostream &Strm, const Prostopadloscian    &Pr)
+{
+    for (int i = 0; i < 8; i++)
+    {
+            Strm << Pr[i] << std::endl;
+    }
+    return Strm;
 }
 
  
