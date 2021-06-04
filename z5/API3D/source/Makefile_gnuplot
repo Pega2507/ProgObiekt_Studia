@@ -1,0 +1,24 @@
+TRGDIR=./
+OBJ=./obj
+CPPFLAGS= -c -g -Wall -pedantic -std=c++17 -I inc
+
+__start__: ${TRGDIR}ex_gnuplot.out
+	${TRGDIR}ex_gnuplot.out
+
+${OBJ}:
+	mkdir ${OBJ}
+
+${TRGDIR}ex_gnuplot.out: ${OBJ} ${OBJ}/Dr3D_gnuplot_api.o ${OBJ}/ex_gnuplot.o
+	g++ -o ${TRGDIR}ex_gnuplot.out ${OBJ}/ex_gnuplot.o ${OBJ}/Dr3D_gnuplot_api.o -lpthread
+
+${OBJ}/ex_gnuplot.o: src/ex_gnuplot.cpp inc/Dr3D_gnuplot_api.hh
+	g++ ${CPPFLAGS} -o ${OBJ}/ex_gnuplot.o src/ex_gnuplot.cpp
+
+${OBJ}/Dr3D_gnuplot_api.o: src/Dr3D_gnuplot_api.cpp inc/Dr3D_gnuplot_api.hh
+	g++ ${CPPFLAGS} -o ${OBJ}/Dr3D_gnuplot_api.o src/Dr3D_gnuplot_api.cpp
+
+inc/Dr3D_gnuplot_api.hh: inc/Draw3D_api_interface.hh
+	touch inc/Dr3D_gnuplot_api.hh
+
+clear:
+	rm -rf ${OBJ} ${TRGDIR}ex_gnuplot.out
