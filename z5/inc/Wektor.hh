@@ -6,21 +6,6 @@
 #include <math.h>
 #include <string>
 
-/*!
- * \file
- * \brief Ten plik powinien zawierać definicję szablonu Wektor<>
- *
- * Ten plik powinien zawierać definicję szablonu Wektor<>.
- * W tym celu należy przerobić definicję klasy Wektor<Wymiar>.
- */
-
-
-/*!
- * \brief Krótki opis czego to jest szablon
- * 
- *  Tutaj trzeba opisac szablon. Jakie pojecie on modeluje
- *  i jakie ma glowne cechy.
- */
 template <int Wymiar>
 class Wektor {
  private:
@@ -34,20 +19,39 @@ public:
    Wektor<Wymiar> operator *(double arg2);
    Wektor<Wymiar> operator /(double arg2); 
    double operator *(const Wektor<Wymiar> &arg2);
-  Wektor();
+  Wektor()
+  {
+  for (int i = 0; i<Wymiar; i++)
+    xy.push_back(0);
+  ile_teraz++;
+  ile_ogolem++;
+  };
   Wektor (std::vector <double > _xy);
   double &operator[] (int ind);
    const double &operator[] (int ind)const;  
+   static void wyswietl_info()
+   {
+  std::cout << "Teraz jest: " << ile_teraz << std::endl;
+  std::cout << "Stworzonych zostalo: " << ile_ogolem << std::endl;
+  };
+   
 };
 
-template <int Wymiar>
+/*template <int Wymiar>
+void Wektor<Wymiar>::wyswietl_info()
+{
+  std::cout << "Teraz jest: " << ile_teraz << std::endl;
+  std::cout << "Stworzonych zostalo: " << ile_ogolem << std::endl;
+}*/
+
+/*template <int Wymiar>
 Wektor<Wymiar>::Wektor()
 {
   for (int i = 0; i<Wymiar; i++)
     xy.push_back(0);
   ile_teraz++;
   ile_ogolem++;
-}
+}*/
 
 template <int Wymiar>
  Wektor<Wymiar>::Wektor (std::vector <double > _xy)
@@ -150,4 +154,8 @@ std::ostream& operator << (std::ostream &Strm, const Wektor<Wymiar> &Wek)
 template class Wektor<3>;
 template std::istream& operator >> (std::istream &Strm, Wektor<3> &Wek);
 template std::ostream& operator << (std::ostream &Strm, const Wektor<3> &Wek);
+template<int Wymiar>
+int Wektor<Wymiar>::ile_teraz = 0;
+template<int Wymiar>
+int Wektor<Wymiar>::ile_ogolem = 0;
 #endif

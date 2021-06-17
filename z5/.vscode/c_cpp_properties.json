@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/API3D/source/inc"
+                "${workspaceFolder}/API3D/source/inc",
+                "${workspaceFolder}/inc"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

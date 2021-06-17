@@ -19,14 +19,14 @@ public:
   Wektor<Wymiar> operator*(const Wektor<Wymiar> &Punkt); //m.in obrot punktu
   Macierz<Wymiar> operator*(const Macierz<Wymiar> &Macierz2);
   Macierz();
-  Macierz(double kat,  std::string os);
+  Macierz(double kat, char os);
   const double &operator()(int ind_x, int ind_y) const;
   double &operator()(int ind_x, int ind_y);
 };
 
 
 template <int Wymiar>
-Macierz<Wymiar>::Macierz(double kat,  std::string os='Z')
+Macierz<Wymiar>::Macierz(double kat, char os)
 {
   double rad = kat * PI / 180;
   if (Wymiar == 2)
@@ -44,7 +44,7 @@ Macierz<Wymiar>::Macierz(double kat,  std::string os='Z')
     mac.resize(3);
     for (int i = 0; i < 3; i++)
       mac[i].resize(3);
-    if (os == "x" || os == "X")
+    if (os == 'x' || os == 'X')
     {
       mac[0][0] = cos(rad);
       mac[0][1] = -sin(rad);
@@ -56,7 +56,7 @@ Macierz<Wymiar>::Macierz(double kat,  std::string os='Z')
       mac[2][1] = 0;
       mac[2][2] = 1;
     }
-    if (os == "y" || os == "Y")
+    if (os == 'y' || os == 'Y')
     {
       mac[0][0] = cos(rad);
       mac[0][1] = 0;
@@ -68,7 +68,7 @@ Macierz<Wymiar>::Macierz(double kat,  std::string os='Z')
       mac[2][1] = 0;
       mac[2][2] = cos(rad);
     }
-    if (os == "z" || os == "Z")
+    if (os == 'z' || os == 'Z')
     {
       mac[0][0] = 1;
       mac[0][1] = 0;
@@ -138,17 +138,25 @@ Macierz<Wymiar> Macierz<Wymiar>::operator*(const Macierz<Wymiar> &Macierz2)
 template <int Wymiar>
 const double &Macierz<Wymiar>::operator()(int ind_x, int ind_y) const
 {
-  if (ind < 0 || ind > Wymiar)
-        std::cerr << "Odwolanie poza pamiec!" << std::endl;
-  return mac[ind_x][ind_y];
+  if (ind_x < 0 || ind_x > Wymiar|| ind_y < 0 || ind_y > Wymiar)
+  {
+    std::cerr << "Odwolanie poza pamiec!" << std::endl;
+    exit(0);
+  }
+  else
+    return mac[ind_x][ind_y];
 }
 
 template <int Wymiar>
 double &Macierz<Wymiar>::operator()(int ind_x, int ind_y)
 {
-  if (ind < 0 || ind > Wymiar)
-        std::cerr << "Odwolanie poza pamiec!" << std::endl;
-  return mac[ind_x][ind_y];
+  if (ind_x < 0 || ind_x > Wymiar|| ind_y < 0 || ind_y > Wymiar)
+  {
+    std::cerr << "Odwolanie poza pamiec!" << std::endl;
+    exit(0);
+  }
+  else
+    return mac[ind_x][ind_y];
 }
 
 /*!
