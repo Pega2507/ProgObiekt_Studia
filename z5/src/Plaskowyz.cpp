@@ -12,13 +12,14 @@ void Plaskowyz::stworz_plaskowyz()
     double przyrost_kata = 360/il_wierz;
     double kat = 0;
     double wylosowane[9];
+    UkladWsp tmp = licz_do_globalnego();
 
     for (int i=0; i<il_wierz; i++)
     {
         wylosowane[i] = promien(generator);
-        Wektor<3> wek ({wylosowane[i],0,0});
+        Wektor<3> wek ({0,0,wylosowane[i]});
         wek = Macierz<3>(kat, 'Z')*wek;
-        temp.push_back(konwertuj(licz_do_poprzedniego(wek)));
+        temp.push_back(konwertuj(tmp.licz_do_poprzedniego(wek)));
         kat += przyrost_kata;
     }
     wierzcholki.push_back(temp);
@@ -27,7 +28,7 @@ void Plaskowyz::stworz_plaskowyz()
     {
         Wektor<3> wek({wylosowane[i],0,wysokosc});
         wek = Macierz<3>(kat, 'Z') * wek;
-        temp.push_back(konwertuj(licz_do_poprzedniego(wek)));
+        temp.push_back(konwertuj(tmp.licz_do_poprzedniego(wek)));
         kat += przyrost_kata; //???
     }
     wierzcholki.push_back(temp);
@@ -39,7 +40,7 @@ void Plaskowyz::rysuj()
     if(obecne_id == -1)
     {
         obecne_id = api->draw_polyhedron(wierzcholki, "purple");
-        std::cout<<"Rysuje plaskowyz"<<std::endl;
+
     }
 }
 

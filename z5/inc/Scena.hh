@@ -26,8 +26,8 @@ public:
    {
        api=_api;
        shared_ptr<Plaska_pow> pow = make_shared<Plaska_pow> (-15, _api);
-       shared_ptr<Wzgorze> wzg = make_shared<Wzgorze> (Wektor<3>({15,15,-15}), 4, 12, 13, _api);
-       shared_ptr<Plaskowyz> plas = make_shared<Plaskowyz> (Wektor<3>({-10, -15,-15}), 3, 9, 12, _api);
+       shared_ptr<Wzgorze> wzg = make_shared<Wzgorze> (Wektor<3>({0,0,0}), 6, 8, 13, _api);
+       shared_ptr<Plaskowyz> plas = make_shared<Plaskowyz> (Wektor<3>({-10, -15,-15}), 5,6,10, _api);
        shared_ptr<Plaskowyz_prost> plask_prost = make_shared<Plaskowyz_prost> (Wektor<3>({-15,15,-15}), Macierz<3>(0, 'Z'), nullptr, 9, 8, 7, _api);
        shared_ptr<Dron> dron1 = make_shared<Dron> (Wektor<3>({0,0,0}), Macierz<3>(0, 'Z'), nullptr, _api);
        shared_ptr<Dron> dron2 = make_shared<Dron> (Wektor<3>({10,10,0}), Macierz<3>(0, 'Z'), nullptr, _api);

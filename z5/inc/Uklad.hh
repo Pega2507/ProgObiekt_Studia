@@ -20,8 +20,8 @@ public:
     drawNS::Point3D konwertuj(Wektor<3> W) const {return {W[0],W[1],W[2]};};
     Wektor<3> get_srodek() const {return srodek;};
     Macierz<3> get_orientacje() const {return orientacja;};
-    UkladWsp licz_do_globalnego(); //CO TO
+    UkladWsp licz_do_globalnego();
 };
 
-//przepisane
+
 #endif

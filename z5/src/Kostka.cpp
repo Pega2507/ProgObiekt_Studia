@@ -3,25 +3,27 @@
 using drawNS::Point3D;
 
 void Kostka::rysuj()
-{
+{   
     double w = wysokosc/2;
     double sz = szerokosc/2;
     double g = glebokosc/2;
+    UkladWsp tmp = licz_do_globalnego();
     std::vector<std::vector<Point3D>> wierzcholki {
-        {konwertuj(licz_do_poprzedniego(Wektor<3>({-sz, -w, -g}))),
-        konwertuj(licz_do_poprzedniego(Wektor<3>({sz, -w, -g}))),
-        konwertuj(licz_do_poprzedniego(Wektor<3>({sz, w, -g}))),
-        konwertuj(licz_do_poprzedniego(Wektor<3>({-sz, w, -g})))
-        },{konwertuj(licz_do_poprzedniego(Wektor<3>({-sz, -w, -g}))),
-        konwertuj(licz_do_poprzedniego(Wektor<3>({sz, -w, g}))),
-        konwertuj(licz_do_poprzedniego(Wektor<3>({sz, w, g}))),
-        konwertuj(licz_do_poprzedniego(Wektor<3>({-sz, w, g})))
+        {konwertuj(tmp.licz_do_poprzedniego(Wektor<3>({-sz, -w, -g}))),
+        konwertuj(tmp.licz_do_poprzedniego(Wektor<3>({sz, -w, -g}))),
+        konwertuj(tmp.licz_do_poprzedniego(Wektor<3>({sz, w, -g}))),
+        konwertuj(tmp.licz_do_poprzedniego(Wektor<3>({-sz, w, -g})))
+        },{konwertuj(tmp.licz_do_poprzedniego(Wektor<3>({-sz, -w, -g}))),
+        konwertuj(tmp.licz_do_poprzedniego(Wektor<3>({sz, -w, g}))),
+        konwertuj(tmp.licz_do_poprzedniego(Wektor<3>({sz, w, g}))),
+        konwertuj(tmp.licz_do_poprzedniego(Wektor<3>({-sz, w, g})))
         }};
+        
     if (obecne_id == -1)
     {
-        obecne_id = api->draw_polyhedron(wierzcholki, "black");
+        //obecne_id = api->draw_polyhedron(wierzcholki, "purple"); TO NIE DZIALA
     }
-    
+     
 }
 
 void Kostka::usun()

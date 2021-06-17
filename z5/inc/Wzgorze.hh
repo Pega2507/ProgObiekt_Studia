@@ -8,13 +8,13 @@
 class Wzgorze : public UkladWsp, public Interfejs_rysowania, public Interfejs_krajobrazu
 {
 protected:
-    std::vector<std::vector<drawNS::Point3D>> wierzcholki;
+    std::vector<std::vector<drawNS::Point3D>> wierzcholki; // wektor 3d lepiej od pointow
     double wysokosc;
     int min;
     int max;
 public:
     Wzgorze();
-    Wzgorze(const Wektor<3> &srodek, int _min, int _max, double wys, drawNS::APIopenGL3D *_api):
+    Wzgorze(const Wektor<3> &srodek, int _min, int _max, double wys, drawNS::APIopenGL3D *_api): //wsk na interfejs api, nie na api
     UkladWsp(srodek, Macierz<3>(0, 'Z'), nullptr), wysokosc(wys), min(_min), max(_max) {api=_api; stworz_wzgorze();};
     void stworz_wzgorze();
     void rysuj() override;

@@ -7,9 +7,9 @@ void Plaska_pow::rysuj()
 {
     std::vector<std::vector<drawNS::Point3D>> wierzcholki;
     std::vector<drawNS::Point3D> rzedy;
-    for (int i = -(int)WIELKOSC_OSI; i <= (int)WIELKOSC_OSI; i++)
+    for (int i = -(int)WIELKOSC_OSI; i <= (int)WIELKOSC_OSI; i+=3)
     {
-        for (int j = -(int)WIELKOSC_OSI; j <= (int)WIELKOSC_OSI; j++)
+        for (int j = -(int)WIELKOSC_OSI; j <= (int)WIELKOSC_OSI; j+=3)
             rzedy.push_back(konwertuj(Wektor<3>({(double)i,(double)j,wysokosc})));
         wierzcholki.push_back(rzedy);
         rzedy.clear();

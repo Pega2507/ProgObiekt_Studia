@@ -21,7 +21,6 @@ void Dron::rysuj()
         obecne_id = -1;
         poprzednie_id = 0;
     }
-    
 }
 
 
@@ -39,7 +38,9 @@ void Dron::lot_gora(double dystans)
     przenies_uklad(Wektor<3> ({0,0,dystans}));
     obecne_id = 0;
     rysuj();
+    sleep (0.5);
     usun();
+    sleep (0.5);
 }
 
 void Dron::lot_przod(double dystans)

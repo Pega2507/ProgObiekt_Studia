@@ -1,8 +1,8 @@
 #include "Uklad.hh"
 
 Wektor<3> UkladWsp::licz_do_poprzedniego(Wektor<3> punkt)
-{
-    Wektor<3> wynik = rodzic->get_srodek() + rodzic->get_orientacje()*(srodek+orientacja*punkt);
+{//nie moge się odwoływać do rodzica
+    Wektor<3> wynik =srodek+orientacja*punkt;
     return wynik;
 }
 

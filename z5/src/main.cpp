@@ -34,7 +34,7 @@ void wyswietl_menu()
 }
 
 int main(int argc, char **argv)
-{cout<<"test";
+{
     auto * api = new drawNS::APIopenGL3D(-ROZMIAR_OSI,ROZMIAR_OSI,-ROZMIAR_OSI,ROZMIAR_OSI,-ROZMIAR_OSI,ROZMIAR_OSI,0,&argc,argv);
     
     Scena s(api);
