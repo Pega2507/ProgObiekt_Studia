@@ -85,7 +85,7 @@ void Dron::animacja(double lot_w_gore, double kat_obrotu, double dystans)
         if (dystans > 0)
         {
             lot_przod(predkosc_lotu);
-            //obrot_wirnikow();
+            obrot_wirnikow();
             std::this_thread::sleep_for(std::chrono::milliseconds(opoznienie));
         }
         if (dystans < 0)
@@ -95,14 +95,13 @@ void Dron::animacja(double lot_w_gore, double kat_obrotu, double dystans)
             std::this_thread::sleep_for(std::chrono::milliseconds(opoznienie));
         }
     }
-    std::cout<<Macierz<3>(kat_obrotu, 'X')<<std::endl;
     for(int i=0; i<int(fabs(kat_obrotu)/predkosc_obrotu); i++)
     {
         if(kat_obrotu>0)
         {
             obrot_drona(predkosc_obrotu);
             
-            //obrot_wirnikow();
+            obrot_wirnikow();
             std::this_thread::sleep_for(std::chrono::milliseconds(opoznienie));
         }
         if(kat_obrotu<0)

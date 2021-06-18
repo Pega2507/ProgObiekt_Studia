@@ -111,7 +111,7 @@ int main(int argc, char **argv)
                 cout<<"Niepoprawna opcja!"<<endl;
                 break;
         }
-
+        cout<<"Co chcesz zrobić? (m - menu): ";
         cin>>wybor;
     }
     delete api;

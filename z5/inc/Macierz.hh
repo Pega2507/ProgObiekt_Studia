@@ -43,7 +43,7 @@ Macierz<Wymiar>::Macierz(double kat, char os)
     mac.resize(3);
     for (int i = 0; i < 3; i++)
       mac[i].resize(3);
-    if (os == 'x' || os == 'X')
+    if (os == 'x' || os == 'X') //zamienione Z z X
     {
       mac[0][0] = cos(rad);
       mac[0][1] = -sin(rad);
@@ -127,6 +127,7 @@ Macierz<Wymiar> Macierz<Wymiar>::operator*(const Macierz<Wymiar> &Macierz2)
   {
     for (int j = 0; j < Wymiar; j++)
     {
+      Wynik(i,j) = 0;
       for (int k = 0; k < Wymiar; k++)
         Wynik(i,j) = Wynik(i,j) + mac[i][k] * Macierz2(k,j);
     }

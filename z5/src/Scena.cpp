@@ -89,6 +89,8 @@ void Scena::dodaj_drona()
 {
     Wektor<3> t_sr;
     Macierz<3> t_or;
+    cout << "Podaj srodek drona:";
+    cin >> t_sr;
     std::shared_ptr<Dron> temp = std::make_shared<Dron>(t_sr, t_or, nullptr, api);
     kolekcja_dronow.push_back(temp);
     kolekcja_narysowanych.push_back(temp);
@@ -113,18 +115,18 @@ void Scena::wybierz_drona()
 {
     pokaz_drony();
     uint wybor;
-    cout <<"wybierz drona: ";
     cout <<"Aktywny dron to ten o srodku: ";
     std::dynamic_pointer_cast<Interfejs_rysowania>(aktywny_dron)->wyswietl_srodek();
+    cout << endl<<"wybierz drona: ";
     cin >> wybor;
     if (wybor > kolekcja_dronow.size())
     {
-        cout <<"Niepoprawna opcja!";
+        cout <<"Niepoprawna opcja!" << endl;
     }
     else
     {
-        aktywny_dron = kolekcja_dronow[wybor];
-        cout <<"dron wybrany";
+        aktywny_dron = kolekcja_dronow[wybor-1];
+        cout <<"dron wybrany"<<endl;
     }
     
     
