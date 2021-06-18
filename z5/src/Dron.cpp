@@ -69,7 +69,7 @@ void Dron::animacja(double lot_w_gore, double kat_obrotu, double dystans)
         if (lot_w_gore > 0)
         {
             lot_gora(predkosc_lotu);
-           // obrot_wirnikow();
+            obrot_wirnikow();
             std::this_thread::sleep_for(std::chrono::milliseconds(opoznienie)); //wgl nie lapie opoznienia
         }
         if (lot_w_gore < 0)
@@ -118,7 +118,7 @@ void Dron::animacja(double lot_w_gore, double kat_obrotu, double dystans)
 void Dron::obrot_wirnikow()
 {
     for (int i = 0; i<4; i++)
-        wirniki[i].obroc(Macierz<3>(30, 'Z'));
+        wirniki[i].obroc(Macierz<3>(30, 'X'));
 }
 
 void Dron::wyswietl_srodek()
