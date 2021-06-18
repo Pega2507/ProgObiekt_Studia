@@ -24,7 +24,7 @@ std::vector<drawNS::Point3D> APIopenGL3D::vertex_buffer;
 std::vector<drawNS::data> APIopenGL3D::shape_buffer;
 pid_t APIopenGL3D::thread_pid;
 int APIopenGL3D::ref_rate = 0;
-const float l_width = 3.5; //define line width for all shapes
+const float l_width = 2.5; //define line width for all shapes
 int APIopenGL3D::mouseoldx = 0;
 int APIopenGL3D::mouseoldy = 0;
 double APIopenGL3D::rotationXangle = -60;
@@ -382,6 +382,8 @@ void APIopenGL3D::Initialize(int *argc,char **argv) {
     glClearColor(1, 1, 1, 1);
     glColor3d(0, 0, 0);
     glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+    glDepthRange(1.0f, -1.0f);
     glutDisplayFunc(Draw_scene);
     glutReshapeFunc(changeSize);
     glutMouseFunc(mouse);
@@ -393,6 +395,7 @@ void APIopenGL3D::Initialize(int *argc,char **argv) {
 
 void APIopenGL3D::Draw_scene() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearDepth(1.0f);
     glLoadIdentity();
     glRotated(rotationXangle, 1, 0, 0);
     glRotated(rotationZangle,0,0,1);
@@ -446,8 +449,8 @@ void APIopenGL3D::Draw_axes() {
     glBegin(GL_LINES); // Z axis
     glVertex3d(-0.5,-0.5,-0.5);    //                +y|     /-z
     glVertex3d(-0.5,-0.5,0.5);     //                  |   /
-    glEnd();                       //                  | /
-    glBegin(GL_LINE_LOOP);         //      -x-----------------------x+
+    glEnd();                             //                  | /
+    glBegin(GL_LINE_LOOP);               //      -x-----------------------x+
     glVertex3d(-0.5,-0.5,-0.5);    //                / |
     glVertex3d(0.5,-0.5,-0.5);     //              /   |
     glVertex3d(0.5,0.5,-0.5);      //          +z/   -y|

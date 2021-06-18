@@ -1,9 +1,9 @@
 #include "Dron.hh"
 #include <unistd.h>
-#define PREDKOSC_LOTU 0.3
-#define PREDKOSC_OBROTU 2
-#define OPOZNIENIE 0.016
-#define OS 'Z'
+#include <cmath>
+const double predkosc_lotu = 0.3;
+const double predkosc_obrotu = 1.5;
+const int opoznienie = 16;
 
 void Dron::rysuj()
 {
@@ -38,9 +38,8 @@ void Dron::lot_gora(double dystans)
     przenies_uklad(Wektor<3> ({0,0,dystans}));
     obecne_id = 0;
     rysuj();
-    sleep (0.5);
     usun();
-    sleep (0.5);
+    
 }
 
 void Dron::lot_przod(double dystans)
@@ -53,7 +52,8 @@ void Dron::lot_przod(double dystans)
 
 void Dron::obrot_drona(double kat)
 {
-    obroc(Macierz<3>(kat, OS));
+    obroc(Macierz<3>(kat, 'X'));
+    
     obecne_id = 0;
     rysuj();
     usun();
@@ -63,51 +63,53 @@ void Dron::animacja(double lot_w_gore, double kat_obrotu, double dystans)
 {
     double wysokosc=0;
     double dyst = 0;
-    while (wysokosc <= fabs(lot_w_gore))
+    while (wysokosc < fabs(lot_w_gore))
     {
-        wysokosc += PREDKOSC_LOTU;
+        wysokosc += predkosc_lotu;
         if (lot_w_gore > 0)
         {
-            lot_gora(PREDKOSC_LOTU);
-            obrot_wirnikow();
-            sleep(OPOZNIENIE);
+            lot_gora(predkosc_lotu);
+           // obrot_wirnikow();
+            std::this_thread::sleep_for(std::chrono::milliseconds(opoznienie)); //wgl nie lapie opoznienia
         }
         if (lot_w_gore < 0)
         {
-            lot_gora(-PREDKOSC_LOTU);
+            lot_gora(-predkosc_lotu);
             obrot_wirnikow();
-            sleep(OPOZNIENIE);
+            std::this_thread::sleep_for(std::chrono::milliseconds(opoznienie));
         }
     }
-    while (dyst <= fabs(dystans))
+    while (dyst < fabs(dystans))
     {
-        dyst += PREDKOSC_LOTU;
+        dyst += predkosc_lotu;
         if (dystans > 0)
         {
-            lot_przod(PREDKOSC_LOTU);
-            obrot_wirnikow();
-            sleep(OPOZNIENIE);
+            lot_przod(predkosc_lotu);
+            //obrot_wirnikow();
+            std::this_thread::sleep_for(std::chrono::milliseconds(opoznienie));
         }
         if (dystans < 0)
         {
-            lot_przod(-PREDKOSC_LOTU);
+            lot_przod(-predkosc_lotu);
             obrot_wirnikow();
-            sleep(OPOZNIENIE);
+            std::this_thread::sleep_for(std::chrono::milliseconds(opoznienie));
         }
     }
-    for(int i=0; i<=int(fabs(kat_obrotu)/PREDKOSC_OBROTU); i++)
+    std::cout<<Macierz<3>(kat_obrotu, 'X')<<std::endl;
+    for(int i=0; i<int(fabs(kat_obrotu)/predkosc_obrotu); i++)
     {
         if(kat_obrotu>0)
         {
-            obrot_drona(PREDKOSC_OBROTU);
-            obrot_wirnikow();
-            sleep(OPOZNIENIE);
+            obrot_drona(predkosc_obrotu);
+            
+            //obrot_wirnikow();
+            std::this_thread::sleep_for(std::chrono::milliseconds(opoznienie));
         }
         if(kat_obrotu<0)
         {
-            obrot_drona(-PREDKOSC_OBROTU);
+            obrot_drona(-predkosc_obrotu);
             obrot_wirnikow();
-            sleep(OPOZNIENIE);
+            std::this_thread::sleep_for(std::chrono::milliseconds(opoznienie));
         }
     }
     

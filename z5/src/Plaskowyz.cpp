@@ -17,8 +17,8 @@ void Plaskowyz::stworz_plaskowyz()
     for (int i=0; i<il_wierz; i++)
     {
         wylosowane[i] = promien(generator);
-        Wektor<3> wek ({0,0,wylosowane[i]});
-        wek = Macierz<3>(kat, 'Z')*wek;
+        Wektor<3> wek ({wylosowane[i],0,0});
+        wek = Macierz<3>(kat, 'x')*wek;
         temp.push_back(konwertuj(tmp.licz_do_poprzedniego(wek)));
         kat += przyrost_kata;
     }
@@ -27,7 +27,7 @@ void Plaskowyz::stworz_plaskowyz()
     for (int i=0; i<il_wierz; i++)
     {
         Wektor<3> wek({wylosowane[i],0,wysokosc});
-        wek = Macierz<3>(kat, 'Z') * wek;
+        wek = Macierz<3>(kat, 'X') * wek;
         temp.push_back(konwertuj(tmp.licz_do_poprzedniego(wek)));
         kat += przyrost_kata; //???
     }

@@ -114,6 +114,8 @@ void Scena::wybierz_drona()
     pokaz_drony();
     uint wybor;
     cout <<"wybierz drona: ";
+    cout <<"Aktywny dron to ten o srodku: ";
+    std::dynamic_pointer_cast<Interfejs_rysowania>(aktywny_dron)->wyswietl_srodek();
     cin >> wybor;
     if (wybor > kolekcja_dronow.size())
     {

@@ -5,7 +5,6 @@
 #include <cmath>
 #include "Wektor.hh"
 
-#define PI 3.14
 
 
 
@@ -28,7 +27,7 @@ public:
 template <int Wymiar>
 Macierz<Wymiar>::Macierz(double kat, char os)
 {
-  double rad = kat * PI / 180;
+  double rad = kat * M_PI / 180;
   if (Wymiar == 2)
   {
     mac.resize(2);
@@ -162,9 +161,9 @@ double &Macierz<Wymiar>::operator()(int ind_x, int ind_y)
 /*!
  * \brief Przeciążenie dla wejścia musi także być szablonem
  * 
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
+ * To przeciazenie trzeba oM_pisac. Co ono robi. Jaki format
  * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
+ * Szczegoly dotyczace zalecen realizacji oM_pisow mozna
  * znalezc w pliku:
  *    ~bk/edu/kpo/zalecenia.txt 
  */

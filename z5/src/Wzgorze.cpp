@@ -15,7 +15,7 @@ void Wzgorze::stworz_wzgorze()
     {
         double r = promien(generator);
         Wektor<3> wek ({r,0,0});
-        wek = Macierz<3>(kat, 'Z')*wek;
+        wek = Macierz<3>(kat, 'X')*wek;
         temp.push_back(konwertuj(tmp.licz_do_poprzedniego(wek)));
         kat += przyrost_kata;
     }
@@ -35,7 +35,7 @@ void Wzgorze::rysuj()
 {
     if(obecne_id == -1)
     {
-        obecne_id = api->draw_polyhedron(wierzcholki, "black");
+        obecne_id = api->draw_polyhedron(wierzcholki, "purple");
     }
 }
 

@@ -13,15 +13,15 @@
 class Dron : protected UkladWsp, public Interfejs_dron, public Interfejs_rysowania
 {
 private:
-    Kostka cialo;
+    Kostka_dron cialo;
     std::array<Graniastoslup,4> wirniki;
     std::vector<Interfejs_rysowania*> kolekcja;
 public:
     Dron();
     explicit Dron(const Wektor<3> &srodek, const Macierz<3> &orientacja, UkladWsp *rodzic, drawNS::APIopenGL3D *_api):
-    UkladWsp(srodek, orientacja, rodzic), cialo(Wektor<3>({0,0,0}), Macierz<3>(), this, 4,3,3, _api), wirniki({
-        Graniastoslup(Wektor<3> ({-2,-2,1}),Macierz<3> (),this,0.7,1.8, _api), Graniastoslup(Wektor<3> ({2,-2,1}),Macierz<3> (),this,0.7,1.8, _api),
-        Graniastoslup(Wektor<3> ({2,2,1}),Macierz<3> (),this,0.7,1.8, _api), Graniastoslup(Wektor<3> ({-2,2,1}),Macierz<3> (),this,0.7,1.8, _api)
+    UkladWsp(srodek, orientacja, rodzic), cialo(Wektor<3>({0,0,0}), Macierz<3>(), this, 3,4,2, _api), wirniki({
+        Graniastoslup(Wektor<3> ({-2,-2,1}),Macierz<3> (),this,0.7,1.3, _api), Graniastoslup(Wektor<3> ({2,-2,1}),Macierz<3> (),this,0.7,1.3, _api),
+        Graniastoslup(Wektor<3> ({2,2,1}),Macierz<3> (),this,0.7,1.3, _api), Graniastoslup(Wektor<3> ({-2,2,1}),Macierz<3> (),this,0.7,1.3, _api)
     }) {api = _api; dodaj_do_kolekcji();};
 
     void dodaj_do_kolekcji() {

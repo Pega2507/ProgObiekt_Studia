@@ -2,14 +2,14 @@
 #define WEKTOR_HH
 
 #include <iostream>
-#include <vector>
+#include <array>
 #include <math.h>
 #include <string>
 
 template <int Wymiar>
 class Wektor {
  private:
-  std::vector <double > xy;
+  std::array<double, Wymiar> xy;
   static int ile_teraz;
   static int ile_ogolem;
 
@@ -22,7 +22,7 @@ public:
   Wektor()
   {
   for (int i = 0; i<Wymiar; i++)
-    xy.push_back(0);
+    xy[i] = 0;
   ile_teraz++;
   ile_ogolem++;
   };
@@ -57,7 +57,7 @@ template <int Wymiar>
  Wektor<Wymiar>::Wektor (std::vector <double > _xy)
 {
    for (int i = 0; i<Wymiar; i++)
-    xy.push_back(_xy[i]);
+    xy[i]=_xy[i];
 }
 template <int Wymiar>
  Wektor<Wymiar> Wektor<Wymiar>::operator+(const Wektor<Wymiar> &arg2) 
