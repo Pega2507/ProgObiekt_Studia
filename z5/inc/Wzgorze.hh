@@ -12,6 +12,7 @@ protected:
     double wysokosc;
     int min;
     int max;
+    double max_promien = 0;
 public:
     Wzgorze();
     Wzgorze(const Wektor<3> &srodek, int _min, int _max, double wys, drawNS::APIopenGL3D *_api): //wsk na interfejs api, nie na api
@@ -19,10 +20,10 @@ public:
     void stworz_wzgorze();
     void rysuj() override;
     void usun() override;
-    void wyswietl_srodek() override;
+    Wektor<3> wyswietl_srodek() override;
 
-    bool czy_nad() override;
-    bool czy_ladowac() override;
+    bool czy_nad(std::shared_ptr<Interfejs_dron> d) override;
+    bool czy_ladowac(std::shared_ptr<Interfejs_dron> d, double &wys_ladowania) override;
 
 };
 

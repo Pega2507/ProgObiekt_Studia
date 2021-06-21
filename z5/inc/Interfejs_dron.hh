@@ -9,6 +9,7 @@ public:
     virtual void lot_przod(double) = 0;
     virtual void obrot_drona(double) = 0;
     virtual void animacja(double,double,double) = 0;
+    virtual double lad_na_pdst() = 0; //nie jestem pewna co to robi i po co to jest
 };
 
 

@@ -47,7 +47,7 @@ void Graniastoslup::usun()
     
 }
 
-void Graniastoslup::wyswietl_srodek()
+Wektor<3> Graniastoslup::wyswietl_srodek()
 {
-    std::cout<<srodek<<std::endl;
+    return srodek;
 }

@@ -9,12 +9,15 @@ private:
     double glebokosc; //x width
     double szerokosc; //y height
     double wysokosc; //z depth
+    std::vector<drawNS::Point3D> wierzcholki;
 public:
     explicit Kostka(const Wektor<3> &srodek, const Macierz<3> &orientacja, UkladWsp *rodzic, double gl, double szer, double wys, drawNS::APIopenGL3D *_api):
     UkladWsp(srodek, orientacja, rodzic), glebokosc(gl), szerokosc(szer), wysokosc(wys) {api = _api;};
     void rysuj() override; 
     void usun() override;
-    void wyswietl_srodek() override;
+    Wektor<3> wyswietl_srodek() override;
+    std::vector<drawNS::Point3D> *get_wierzcholki() {return &wierzcholki;};
+
 
 };
 
@@ -28,7 +31,7 @@ public:
     UkladWsp(srodek, orientacja, rodzic), glebokosc(gl), szerokosc(szer), wysokosc(gl) {api = _api;};
     void rysuj() override; 
     void usun() override;
-    void wyswietl_srodek() override;
+    Wektor<3> wyswietl_srodek() override;
 
 };
 

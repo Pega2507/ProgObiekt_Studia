@@ -4,6 +4,54 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+bool Scena::kolizja(double &dystans)
+{
+    std::vector<int> id_ksztaltow_bl_drona;
+    std::shared_ptr<Interfejs_krajobrazu> ladowisko = std::dynamic_pointer_cast<Interfejs_krajobrazu> (aktywny_dron);
+    for (uint i = 0; i<kolekcja_krajobrazow.size(); i++)
+    {
+        if (ladowisko != kolekcja_krajobrazow[i])
+        {
+            Wektor<3> temp1 = std::dynamic_pointer_cast<Interfejs_rysowania>(kolekcja_krajobrazow[i])->wyswietl_srodek();
+            Wektor<3> temp2 = std::dynamic_pointer_cast<Interfejs_rysowania>(aktywny_dron)->wyswietl_srodek();
+            double dyst = sqrt(pow(temp1[0]-temp2[0],2)+pow(temp1[1]-temp2[1],2));
+            if (dyst < (kolekcja_krajobrazow[i]->get_promien()+ladowisko->get_promien()*1.2))
+            {
+                id_ksztaltow_bl_drona.push_back(i);
+            }
+                
+        }
+    }
+    if (!id_ksztaltow_bl_drona.empty())
+    {
+        for (int i : id_ksztaltow_bl_drona)
+        {
+            if(!kolekcja_krajobrazow[i]->czy_nad(aktywny_dron))
+                id_ksztaltow_bl_drona[i] = -1;
+        }
+        for (int i : id_ksztaltow_bl_drona)
+        {
+            if (i != -1)
+            {
+                if (!kolekcja_krajobrazow[i]->czy_ladowac(aktywny_dron, dystans))
+                {
+                     return false;
+                }
+                   
+            }
+        }
+        return true;
+        
+    }
+    else
+    {
+        dystans = std::dynamic_pointer_cast<Interfejs_rysowania>(aktywny_dron)->wyswietl_srodek()[2]+15-aktywny_dron->lad_na_pdst();
+        return true;
+    }
+    
+}
+
+
 void Scena::dodaj_el_krajobrazu()
 { 
     cout << "Co chcesz dodac?"<<endl;

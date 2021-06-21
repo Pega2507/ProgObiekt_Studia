@@ -1,4 +1,5 @@
 #include "Wzgorze.hh"
+#include "Interfejs_dron.hh"
 
 void Wzgorze::stworz_wzgorze()
 {
@@ -14,6 +15,8 @@ void Wzgorze::stworz_wzgorze()
     for (int i=0; i<il_wierz; i++)
     {
         double r = promien(generator);
+        if (r > max_promien)
+            max_promien = r;
         Wektor<3> wek ({r,0,0});
         wek = Macierz<3>(kat, 'X')*wek;
         temp.push_back(konwertuj(tmp.licz_do_poprzedniego(wek)));
@@ -27,6 +30,7 @@ void Wzgorze::stworz_wzgorze()
         kat += przyrost_kata; //???
     }
     wierzcholki.push_back(temp);
+    promien_ksztaltu = max_promien;
 }
 
 
@@ -45,17 +49,22 @@ void Wzgorze::usun()
     api->erase_shape(obecne_id);
 }
 
-bool Wzgorze::czy_nad()
+bool Wzgorze::czy_nad(std::shared_ptr<Interfejs_dron> d)
 {
-    return true;
+    Wektor<3> temp = std::dynamic_pointer_cast<Interfejs_rysowania>(d)->wyswietl_srodek();
+    double odleglosc = sqrt(pow(srodek[0]-temp[2], 2)+pow(srodek[1]-temp[1], 2));
+    if (odleglosc <= this -> get_promien()+std::dynamic_pointer_cast<Interfejs_krajobrazu>(d)->get_promien())
+        return true;
+    return false;
+
 }
 
-bool Wzgorze::czy_ladowac()
+bool Wzgorze::czy_ladowac(std::shared_ptr<Interfejs_dron> d, double &wys_ladowania)
 {
-    return true;
+    return false;
 }
 
-void Wzgorze::wyswietl_srodek()
+Wektor<3> Wzgorze::wyswietl_srodek()
 {
-    std::cout << srodek;
+    return srodek;
 }

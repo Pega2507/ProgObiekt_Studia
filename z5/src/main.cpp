@@ -106,6 +106,7 @@ int main(int argc, char **argv)
                 break;
             case 'k':
                 cout<<"Koniec na dziś!"<<endl;
+                return 0;
                 break;
             default:
                 cout<<"Niepoprawna opcja!"<<endl;

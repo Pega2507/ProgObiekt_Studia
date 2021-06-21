@@ -12,7 +12,7 @@ public:
     explicit Plaska_pow(double wys, drawNS::APIopenGL3D *_api) : wysokosc(wys) {api = _api;};
     void rysuj() override; 
     void usun() override;
-    void wyswietl_srodek() override;
+    Wektor<3> wyswietl_srodek() override;
     drawNS::Point3D konwertuj(Wektor<3> W) const {return {W[0],W[1],W[2]};};
 };
 

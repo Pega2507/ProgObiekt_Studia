@@ -14,7 +14,7 @@ public:
     UkladWsp(srodek, orientacja, rodzic), wysokosc(wys), promien(r) {api = _api;};
     void rysuj() override;
     void usun() override;
-    void wyswietl_srodek();
+    Wektor<3> wyswietl_srodek() override;
 
 
 };

@@ -39,9 +39,9 @@ void Kostka::usun()
     }
 }
 
-void Kostka::wyswietl_srodek()
+Wektor<3> Kostka::wyswietl_srodek()
 {
-    std::cout<<srodek<<std::endl;
+    return srodek;
 }
 
 /******************************************************/
@@ -90,7 +90,7 @@ void Kostka_dron::usun()
     }
 }
 
-void Kostka_dron::wyswietl_srodek()
-    {
-        std::cout<<srodek<<std::endl;
-    }
+Wektor<3> Kostka_dron::wyswietl_srodek()
+{
+    return srodek;
+}

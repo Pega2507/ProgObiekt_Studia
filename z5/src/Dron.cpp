@@ -120,10 +120,23 @@ void Dron::obrot_wirnikow()
         wirniki[i].obroc(Macierz<3>(30, 'X'));
 }
 
-void Dron::wyswietl_srodek()
+Wektor<3> Dron::wyswietl_srodek()
 {
-    std::cout << srodek;
+    return srodek;
 }
 
+bool Dron::czy_nad(std::shared_ptr<Interfejs_dron> d)
+{
+    Wektor<3> temp = std::dynamic_pointer_cast<Interfejs_rysowania>(d)->wyswietl_srodek();
+    double dystans = sqrt(pow(srodek[0]-temp[0],2)+pow(srodek[1]-temp[1],2));
+    if (dystans <= this->get_promien()+std::dynamic_pointer_cast<Interfejs_krajobrazu>(d)->get_promien());
+        return true;
+    return false;
 
+}
+
+bool Dron::czy_ladowac(std::shared_ptr<Interfejs_dron> d, double &wys_ladowania)
+{
+    return false;
+}
 

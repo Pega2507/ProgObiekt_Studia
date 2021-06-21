@@ -12,7 +12,7 @@ protected:
 public:
     virtual void rysuj() = 0;
     virtual void usun() = 0;
-    virtual void wyswietl_srodek() = 0; 
+    virtual Wektor<3> wyswietl_srodek() = 0; 
 };
 
 

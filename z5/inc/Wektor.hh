@@ -34,24 +34,17 @@ public:
   std::cout << "Teraz jest: " << ile_teraz << std::endl;
   std::cout << "Stworzonych zostalo: " << ile_ogolem << std::endl;
   };
-   
+   double dlugosc();
 };
 
-/*template <int Wymiar>
-void Wektor<Wymiar>::wyswietl_info()
+template <int Wymiar>
+double Wektor<Wymiar>::dlugosc()
 {
-  std::cout << "Teraz jest: " << ile_teraz << std::endl;
-  std::cout << "Stworzonych zostalo: " << ile_ogolem << std::endl;
-}*/
-
-/*template <int Wymiar>
-Wektor<Wymiar>::Wektor()
-{
+  double wynik;
   for (int i = 0; i<Wymiar; i++)
-    xy.push_back(0);
-  ile_teraz++;
-  ile_ogolem++;
-}*/
+    wynik = wynik + (*this)[i] * (*this)[i];
+  return sqrt(wynik);
+}
 
 template <int Wymiar>
  Wektor<Wymiar>::Wektor (std::vector <double > _xy)

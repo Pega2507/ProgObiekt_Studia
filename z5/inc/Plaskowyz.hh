@@ -13,6 +13,8 @@ protected:
     double wysokosc;
     int min;
     int max;
+    double max_promien = 0;
+    std::vector<drawNS::Point3D> wierzcholki2;
 public:
     Plaskowyz();
     Plaskowyz(const Wektor<3> &srodek, int _min, int _max, double wys, drawNS::APIopenGL3D *_api):
@@ -20,9 +22,9 @@ public:
     void stworz_plaskowyz();
     void rysuj() override;
     void usun() override;
-    void wyswietl_srodek() override;
-    bool czy_nad() override;
-    bool czy_ladowac() override;
+    Wektor<3> wyswietl_srodek() override;
+    bool czy_nad(std::shared_ptr<Interfejs_dron> d) override;
+    bool czy_ladowac(std::shared_ptr<Interfejs_dron> d, double &wys_ladowania) override;
 
 };
 

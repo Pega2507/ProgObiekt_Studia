@@ -22,7 +22,8 @@ void Plaska_pow::usun()
     std::cout<<"Nie mozna usunac powierzchni!";
 }
 
-void Plaska_pow::wyswietl_srodek()
+Wektor<3> Plaska_pow::wyswietl_srodek()
 {
     std::cout <<"nie mam srodka";
+    return Wektor<3> ({0,0,0});
 }

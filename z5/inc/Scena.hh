@@ -52,6 +52,16 @@ public:
         {
             aktywny_dron->animacja(wysokosc, kat, dystans);
         }
+        double temp = 0;
+        if (kolizja(temp))
+        {
+            aktywny_dron->animacja(-temp,0,0);
+        }
+        else
+        {
+            std::cout<<"Nie moge ladowac!"<<std::endl;
+        }
+        
     };
 
     void rysuj_wszystko()
@@ -68,6 +78,7 @@ public:
     void dodaj_drona();
     void usun_drona();
     void wybierz_drona();
+    bool kolizja(double &dystans);
 };
 
 
